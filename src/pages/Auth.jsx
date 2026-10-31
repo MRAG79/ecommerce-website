@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../context/AuthContext";
 
-const Auth = () => {
+export default function Auth () {
   const [mode, setMode] = useState("signup");
+  const { signUp } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  function onSubmit() {
-    alert("signed up");
+  function onSubmit(data) {
+    signUp(data.email, data.password);
   }
 
   return (
@@ -18,7 +21,7 @@ const Auth = () => {
       <div className="container">
         <div className="auth-container">
           <h1 className="page-title">
-            {mode === "signup" ? "Sing Up" : "Login"}
+            {mode === "signup" ? "Sign Up" : "Login"}
           </h1>
           <form className="auth-form" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
@@ -58,7 +61,7 @@ const Auth = () => {
               )}
             </div>
             <button type="submit" className="btn btn-primary btn-large">
-              {mode === "signup" ? "Sing Up" : "Login"}
+              {mode === "signup" ? "Sign Up" : "Login"}
             </button>
           </form>
           <div className="auth-switch">
@@ -84,4 +87,3 @@ const Auth = () => {
   );
 };
 
-export default Auth;
