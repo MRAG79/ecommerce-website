@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../context/AuthContext";
 
-export default function Auth () {
+const Auth = () => {
   const [mode, setMode] = useState("signup");
   const { signUp } = useContext(AuthContext);
 
@@ -87,3 +87,4 @@ export default function Auth () {
   );
 };
 
+export default Auth;
